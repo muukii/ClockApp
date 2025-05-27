@@ -12,14 +12,19 @@ import HexColorMacro
 struct BlurryClockApp: App {
   var body: some Scene {
     WindowGroup {
-      ZStack {
-        #hexColor("D9D9D9")
-          .ignoresSafeArea()
-        ScaledView(baseSize: .init(width: 300, height: 300)) {
-          ContentView()
-            .padding(120)
+      TabView {    
+        Tab.init {       
+          ClockView()
+        } label: { 
+          Label.init("Clock", systemImage: "clock.fill")
+        }
+        Tab.init {
+          SettingsView()    
+        } label: {
+          Label.init("Settings", systemImage: "gear.circle.fill")
         }
       }
+      .tabViewStyle(.sidebarAdaptable)
       .onAppear {
         UIApplication.shared.isIdleTimerDisabled = true
       }
